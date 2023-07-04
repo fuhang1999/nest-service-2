@@ -2,7 +2,7 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-07-04 16:50:41
- * @LastEditTime: 2023-07-04 17:49:44
+ * @LastEditTime: 2023-07-05 02:22:13
  * @LastEditors: Please set LastEditors
  * @FilePath: \nest-service\src\common\db\redis.service.ts
  */
@@ -12,19 +12,16 @@ import Redis from 'ioredis';
 
 @Injectable()
 export class RedisService {
-  private readonly redisClient: Redis;
+  private readonly accessTokenRedis: Redis;
+  private readonly refreshTokenRedis: Redis;
   private readonly configService: ConfigService;
 
   constructor() {
-    this.redisClient = new Redis({
-      host: 'localhost', // Redis host
-      port: 6379, // Redis port
-      password: '123456',
-      db: 0,
-      //   host: this.configService.get<string>('redis.host'), // Redis host
-      //   port: this.configService.get<number>('redis.port'), // Redis port
-      //   password: this.configService.get<any>('redis.password'),
-      //   db: this.configService.get<number>('redis.db'),
+    this.accessTokenRedis = new Redis({
+      host: process.env['REDIS_HOST'], // Redis host
+      port: process.env['REDIS_PORT'] as any, // Redis port
+      password: process.env['REDIS_PASSWORD'],
+      db: process.env['REDIS_DB'] as any,
     });
   }
 
@@ -33,13 +30,13 @@ export class RedisService {
     value: string,
     expirySeconds: number,
   ): Promise<void> {
-    await this.redisClient.set(key, value, 'EX', expirySeconds);
+    await this.accessTokenRedis.set(key, value, 'EX', expirySeconds);
   }
 
   async getWithExpiry(key: string): Promise<string | null> {
-    const value = await this.redisClient.get(key);
+    const value = await this.accessTokenRedis.get(key);
     if (value) {
-      const ttl = await this.redisClient.ttl(key);
+      const ttl = await this.accessTokenRedis.ttl(key);
       if (ttl > 0) {
         return value;
       }
@@ -48,6 +45,6 @@ export class RedisService {
   }
 
   async del(key: string): Promise<void> {
-    await this.redisClient.del(key);
+    await this.accessTokenRedis.del(key);
   }
 }

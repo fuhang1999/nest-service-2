@@ -2,7 +2,7 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-03-31 01:11:57
- * @LastEditTime: 2023-07-04 21:14:44
+ * @LastEditTime: 2023-07-05 02:43:28
  * @LastEditors: Please set LastEditors
  * @FilePath: \nest-service\src\modules\auth\jwt-auth.guard.ts
  */
@@ -46,8 +46,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         console.log('redis_token', redis_token);
         request['headers'].authorization = `Bearer ${redis_token}`;
         console.log("request['headers']", request['headers']);
-        
         const payload = this.jwtService.decode(redis_token);
+        // request.user = payload; // 将userId存储到request中，供后续使用
         console.log('payload', payload);
         if (!payload) {
           throw new UnauthorizedException('您的登录信息已过期，请重新登录');

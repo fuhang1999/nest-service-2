@@ -2,7 +2,7 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-07-03 02:42:10
- * @LastEditTime: 2023-07-04 22:01:25
+ * @LastEditTime: 2023-07-05 02:42:24
  * @LastEditors: Please set LastEditors
  * @FilePath: \nest-service\src\modules\user\user.controller.ts
  */
@@ -15,6 +15,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -33,10 +34,13 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Req() req) {
+    console.log('req', req.user);
+    
+    // return this.userService.findAll();
+    return req.user;
   }
   
   @UseGuards(JwtAuthGuard)

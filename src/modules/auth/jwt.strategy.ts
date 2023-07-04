@@ -2,7 +2,7 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-03-31 01:11:57
- * @LastEditTime: 2023-07-04 21:59:58
+ * @LastEditTime: 2023-07-05 01:48:38
  * @LastEditors: Please set LastEditors
  * @FilePath: \nest-service\src\modules\auth\jwt.strategy.ts
  */
@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // console.log('user-payload', payload);
+    console.log('user-payload', payload);
     // const user = await this.authService.validateUser(payload.username, payload.password);
     // console.log('user', user);
 

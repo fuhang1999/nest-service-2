@@ -2,7 +2,7 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-07-03 02:42:10
- * @LastEditTime: 2023-07-04 22:01:18
+ * @LastEditTime: 2023-07-05 01:38:20
  * @LastEditors: Please set LastEditors
  * @FilePath: \nest-service\src\modules\user\entities\user.entity.ts
  */
@@ -19,7 +19,7 @@ import {
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
