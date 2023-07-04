@@ -1,3 +1,11 @@
+/*
+ * @Description:
+ * @Author: FuHang
+ * @Date: 2023-07-04 11:46:03
+ * @LastEditTime: 2023-07-04 22:04:51
+ * @LastEditors: Please set LastEditors
+ * @FilePath: \nest-service\.eslintrc.js
+ */
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {

@@ -2,11 +2,11 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-07-03 02:42:10
- * @LastEditTime: 2023-07-04 03:12:14
+ * @LastEditTime: 2023-07-04 22:01:18
  * @LastEditors: Please set LastEditors
- * @FilePath: \nest-service\src\core\user\entities\user.entity.ts
+ * @FilePath: \nest-service\src\modules\user\entities\user.entity.ts
  */
-import { Role } from '@/core/role/entities/role.entity';
+import { Role } from '@/modules/role/entities/role.entity';
 import {
   Column,
   CreateDateColumn,
@@ -18,15 +18,29 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User{
+export class User {
   @PrimaryGeneratedColumn()
-  id: number;
-  
-  @Column()
+  id: string;
+
+  @Column({
+    unique: true,
+  })
   username: string;
 
   @Column()
   password: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  nickName: string;
+
+  @Column()
+  remark: string;
 
   //   一个用户对应一个角色，一个角色对应多个用户
   @ManyToOne(() => Role, (role) => role.user)

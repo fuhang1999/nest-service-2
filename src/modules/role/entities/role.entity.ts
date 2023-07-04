@@ -2,12 +2,12 @@
  * @Description:
  * @Author: FuHang
  * @Date: 2023-07-03 02:42:59
- * @LastEditTime: 2023-07-04 03:11:15
+ * @LastEditTime: 2023-07-04 14:39:16
  * @LastEditors: Please set LastEditors
- * @FilePath: \nest-service\src\core\role\entities\role.entity.ts
+ * @FilePath: \nest-service\src\modules\role\entities\role.entity.ts
  */
-import { Menu } from '@/core/menu/entities/menu.entity';
-import { User } from '@/core/user/entities/user.entity';
+import { Menu } from '@/modules/menu/entities/menu.entity';
+import { User } from '@/modules/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
